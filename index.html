@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shadow Admin</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>The Eminence in Shadow - Admin</h1>
+    </header>
+
+    <main>
+        <div id="error-message" class="error" style="display: none;"></div>
+
+        <section id="add-shadow-section">
+            <h2>Add New Shadow</h2>
+            <form id="add-form">
+                <div>
+                    <label for="add-srank">Rank (ID):</label>
+                    <input type="number" id="add-srank" name="srank" required>
+                </div>
+                <div>
+                    <label for="add-name">Name:</label>
+                    <input type="text" id="add-name" name="name" required>
+                </div>
+                <div>
+                    <label for="add-fav_food">Favorite Food:</label>
+                    <input type="text" id="add-fav_food" name="fav_food" required>
+                </div>
+                <button type="submit">Add Shadow</button>
+            </form>
+        </section>
+
+        <section id="update-shadow-section" style="display: none;">
+            <h2>Update Shadow</h2>
+            <form id="update-form">
+                <input type="hidden" id="update-srank" name="srank">
+                <div>
+                    <label>Rank (ID):</label>
+                    <span id="update-srank-display"></span>
+                </div>
+                <div>
+                    <label for="update-name">Name:</label>
+                    <input type="text" id="update-name" name="name" required>
+                </div>
+                <div>
+                    <label for="update-fav_food">Favorite Food:</label>
+                    <input type="text" id="update-fav_food" name="fav_food" required>
+                </div>
+                <button type="submit">Update Shadow</button>
+                <button type="button" id="cancel-update">Cancel</button>
+            </form>
+        </section>
+
+        <section id="shadow-list-section">
+            <h2>Shadow List</h2>
+            <table id="shadow-table">
+                <thead>
+                    <tr>
+                        <th>Rank (ID)</th>
+                        <th>Name</th>
+                        <th>Favorite Food</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="shadow-table-body">
+                    <!-- Shadow data will be populated here by JavaScript -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <footer>
+        <p>Powered by Shadow Garden Tech</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
