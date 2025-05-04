@@ -1,7 +1,42 @@
 document.addEventListener("DOMContentLoaded", () => {
     // API URL - updated to match the backend controller mappings
-    const API_BASE_URL = "http://localhost:8080/api/";
+    const API_BASE_URL = "https://spring-proj-production.up.railway.app/api/";
     
+    // Theme management
+    const themeButtons = document.querySelectorAll('.theme-btn');
+    const DEFAULT_THEME = 'shadow-dark';
+    
+    // Initialize theme from localStorage or use default
+    function initializeTheme() {
+        const savedTheme = localStorage.getItem('shadowGardenTheme') || DEFAULT_THEME;
+        document.body.className = savedTheme;
+        highlightActiveThemeButton(savedTheme);
+    }
+    
+    // Highlight the active theme button
+    function highlightActiveThemeButton(themeName) {
+        themeButtons.forEach(btn => {
+            if (btn.dataset.theme === themeName) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+    }
+    
+    // Add click handlers to theme buttons
+    themeButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const newTheme = btn.dataset.theme;
+            document.body.className = newTheme;
+            localStorage.setItem('shadowGardenTheme', newTheme);
+            highlightActiveThemeButton(newTheme);
+        });
+    });
+    
+    // Initialize theme
+    initializeTheme();
+
     const shadowTableBody = document.getElementById("shadow-table-body");
     const addForm = document.getElementById("add-form");
     const updateForm = document.getElementById("update-form");

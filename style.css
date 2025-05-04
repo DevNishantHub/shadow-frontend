@@ -1,175 +1,615 @@
 /* General Styles */
 body {
     font-family: 'Inter', 'Poppins', sans-serif;
-    background-color: #0E0E10; /* Dark background */
-    color: #E0E0E0; /* Light text */
+    background-color: var(--bg-color);
+    background-image: var(--bg-gradient);
+    color: var(--text-color);
     margin: 0;
     padding: 0;
     line-height: 1.6;
+    background-attachment: fixed;
+    min-height: 100vh;
 }
 
 main {
-    max-width: 900px;
-    margin: 2rem auto;
-    padding: 1rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+    position: relative;
+}
+
+/* Cool Shadow Garden logo pulse effect */
+@keyframes shadowPulse {
+    0% { text-shadow: 0 0 10px rgba(106, 13, 173, 0.1), 0 0 20px rgba(199, 21, 133, 0); }
+    50% { text-shadow: 0 0 20px rgba(106, 13, 173, 0.3), 0 0 30px rgba(199, 21, 133, 0.2); }
+    100% { text-shadow: 0 0 10px rgba(106, 13, 173, 0.1), 0 0 20px rgba(199, 21, 133, 0); }
 }
 
 header {
-    background-color: #1A1A1A; /* Slightly lighter dark */
-    padding: 1rem 0;
+    background-color: var(--header-bg);
+    padding: 1.5rem 0;
     text-align: center;
-    border-bottom: 1px solid #2D2D2D; /* Subtle border */
-    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--border-color);
+    margin-bottom: 2.5rem;
+    position: relative;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 15px var(--shadow-color);
+}
+
+/* Add subtle line pattern to header */
+header:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent1), var(--accent2), var(--accent1));
+    opacity: 0.8;
 }
 
 h1 {
-    color: #6A0DAD; /* Purple accent */
+    color: var(--accent1);
     margin: 0;
     font-weight: 700;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    animation: shadowPulse 3s infinite;
 }
 
 h2 {
-    color: #C71585; /* Magenta accent */
-    border-bottom: 1px solid #2D2D2D;
-    padding-bottom: 0.5rem;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-    font-weight: 400;
+    color: var(--accent2);
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.7rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 1px;
 }
 
 section {
-    background-color: #161618; /* Slightly lighter card background */
-    padding: 1.5rem;
-    margin-bottom: 2rem;
-    border-radius: 8px;
-    border: 1px solid #2D2D2D;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    background-color: var(--card-bg);
+    padding: 2rem;
+    margin-bottom: 2.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 8px 20px var(--shadow-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+section:hover {
+    box-shadow: 0 12px 25px var(--shadow-color);
+    transform: translateY(-5px);
 }
 
 /* Forms */
 form div {
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
 }
 
 label {
     display: block;
-    margin-bottom: 0.3rem;
-    color: #AAAAAA; /* Muted text */
-    font-weight: 300;
+    margin-bottom: 0.4rem;
+    color: var(--muted-text);
+    font-weight: 400;
+    letter-spacing: 0.5px;
 }
 
 input[type="text"],
 input[type="number"] {
-    width: calc(100% - 22px); /* Account for padding and border */
-    padding: 0.6rem;
-    background-color: #1A1A1A; /* Input background */
-    border: 1px solid #2D2D2D;
-    border-radius: 4px;
-    color: #E0E0E0;
+    width: calc(100% - 24px);
+    padding: 0.8rem 12px;
+    background-color: var(--input-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    color: var(--text-color);
     font-size: 1rem;
     font-family: inherit;
+    transition: all 0.3s ease;
+}
+
+input[type="text"]:hover,
+input[type="number"]:hover {
+    border-color: var(--accent1);
 }
 
 input[type="text"]:focus,
 input[type="number"]:focus {
     outline: none;
-    border-color: #6A0DAD; /* Purple accent on focus */
-    box-shadow: 0 0 0 2px rgba(106, 13, 173, 0.3);
+    border-color: var(--accent1);
+    box-shadow: 0 0 0 3px rgba(106, 13, 173, 0.2);
+}
+
+/* Button styles with ripple effect */
+@keyframes ripple {
+    to {
+        transform: scale(2.5);
+        opacity: 0;
+    }
 }
 
 button {
-    background-color: #6A0DAD; /* Purple accent */
+    background: var(--btn-gradient);
     color: #FFFFFF;
     border: none;
-    padding: 0.7rem 1.5rem;
-    border-radius: 4px;
+    padding: 0.8rem 1.8rem;
+    border-radius: 6px;
     cursor: pointer;
     font-size: 1rem;
-    font-weight: 400;
-    transition: background-color 0.2s ease-in-out, transform 0.1s ease;
-    margin-right: 0.5rem; /* Spacing between buttons */
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    margin-right: 0.8rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 10px var(--shadow-color);
+    text-transform: uppercase;
+}
+
+button:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    transform: scale(0);
+    opacity: 1;
+    pointer-events: none;
+}
+
+button:active:after {
+    animation: ripple 0.6s linear;
 }
 
 button:hover {
-    background-color: #580b94;
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px var(--shadow-color);
 }
 
 button:active {
     transform: translateY(0);
+    box-shadow: 0 2px 5px var(--shadow-color);
 }
 
 button[type="button"] {
-    background-color: #444;
+    background: linear-gradient(135deg, #555, #333);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 button[type="button"]:hover {
-    background-color: #555;
+    background: linear-gradient(135deg, #666, #444);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
 }
 
-/* Table */
+/* Table with glowing effects */
 table {
     width: 100%;
-    border-collapse: collapse;
-    margin-top: 1rem;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 1.5rem;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px var(--shadow-color);
 }
 
 thead {
-    background-color: #1A1A1A;
+    background: var(--table-header-bg);
+    position: relative;
+}
+
+thead:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent1), var(--accent2), var(--accent1));
 }
 
 th, td {
-    padding: 0.8rem 1rem;
+    padding: 1rem 1.2rem;
     text-align: left;
-    border-bottom: 1px solid #2D2D2D;
 }
 
 th {
-    color: #C71585; /* Magenta accent for headers */
-    font-weight: 400;
+    color: var(--th-color);
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+tbody tr {
+    background-color: var(--card-bg);
+    transition: all 0.3s ease;
+}
+
+tbody tr:nth-child(even) {
+    background-color: var(--hover-bg);
 }
 
 tbody tr:hover {
-    background-color: #1F1F21; /* Subtle hover effect */
+    background-color: var(--hover-bg);
+    box-shadow: 0 0 20px var(--shadow-color);
+    transform: scale(1.01);
+    position: relative;
+    z-index: 1;
+}
+
+td {
+    border-bottom: 1px solid var(--border-color);
 }
 
 td button {
-    padding: 0.3rem 0.6rem;
-    font-size: 0.9rem;
-    margin-right: 0.3rem;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+    margin-right: 0.4rem;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+td button:hover {
+    opacity: 1;
 }
 
 .action-btn-edit {
-    background-color: #555;
+    background: var(--btn-edit);
 }
+
 .action-btn-edit:hover {
-    background-color: #666;
+    background: var(--btn-edit);
 }
 
 .action-btn-delete {
-    background-color: #8B0000; /* Dark red */
+    background: var(--btn-delete);
 }
+
 .action-btn-delete:hover {
-    background-color: #A52A2A; /* Lighter red */
+    background: var(--btn-delete);
 }
 
-/* Error Message */
+/* Error Message with smooth animation */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
 .error {
-    background-color: #8B0000; /* Dark red */
-    color: white;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    border-radius: 4px;
-    border: 1px solid #A52A2A;
+    background-color: var(--error-bg);
+    color: var(--text-color);
+    padding: 1.2rem;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    border-left: 5px solid var(--accent2);
+    box-shadow: 0 4px 10px var(--shadow-color);
+    animation: shake 0.5s ease;
+    backdrop-filter: blur(5px);
 }
 
-/* Footer */
+/* Footer with subtle glow */
 footer {
     text-align: center;
-    margin-top: 3rem;
-    padding-top: 1rem;
-    border-top: 1px solid #2D2D2D;
-    color: #AAAAAA; /* Muted text */
+    margin-top: 4rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--border-color);
+    color: var(--muted-text);
     font-size: 0.9rem;
+    position: relative;
+}
+
+footer p {
+    position: relative;
+    display: inline-block;
+}
+
+footer p:after {
+    content: "™";
+    font-size: 0.7em;
+    vertical-align: super;
+    margin-left: 2px;
+}
+
+/* Add some shadow-themed customizations */
+#shadow-list-section h2:before {
+    content: "☽";
+    margin-right: 8px;
+}
+
+/* Light shimmer effect for table rows */
+@keyframes shimmer {
+    0% { background-position: -100% 0; }
+    100% { background-position: 200% 0; }
+}
+
+tbody tr:hover:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        rgba(255,255,255,0) 0%, 
+        rgba(255,255,255,0.1) 50%, 
+        rgba(255,255,255,0) 100%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    z-index: -1;
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+    main {
+        padding: 1rem;
+    }
+    
+    section {
+        padding: 1.5rem;
+    }
+    
+    button {
+        padding: 0.7rem 1.4rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Theme Selector Section */
+.theme-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.theme-group {
+    flex: 1;
+    min-width: 280px;
+}
+
+.theme-group h3 {
+    color: #BBBBCC;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.theme-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.theme-btn {
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    position: relative;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    flex: 1;
+    min-width: 120px;
+    text-align: center;
+    border: 2px solid transparent;
+}
+
+.theme-btn:hover {
+    transform: translateY(-3px);
+}
+
+.theme-btn.active {
+    border-color: #FFFFFF;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* Define all themes */
+/* 
+   Each theme defines these CSS variables:
+   --bg-color: Main background color
+   --bg-gradient: Background gradient
+   --card-bg: Card/section background
+   --text-color: Main text color
+   --muted-text: Secondary text color
+   --accent1: Primary accent color
+   --accent2: Secondary accent color
+   --border-color: Border color for cards and elements
+   --input-bg: Background color for form inputs
+   --btn-gradient: Button gradient
+   --hover-bg: Background color for hover effects
+   --error-bg: Background for error messages
+   --th-color: Table header text color
+   --table-header-bg: Table header background
+   --btn-edit: Edit button gradient
+   --btn-delete: Delete button gradient
+*/
+
+/* Shadow Dark Theme (Default) */
+:root {
+    --bg-color: #0A0A12;
+    --bg-gradient: linear-gradient(to bottom right, #0A0A12 0%, #1A1A2E 100%);
+    --card-bg: rgba(24, 24, 30, 0.8);
+    --text-color: #E0E0E0;
+    --muted-text: #BBBBCC;
+    --accent1: #8A2BE2;
+    --accent2: #FF1493;
+    --border-color: #3D3D4D;
+    --input-bg: rgba(35, 35, 45, 0.5);
+    --btn-gradient: linear-gradient(135deg, #8A2BE2, #6A0DAD);
+    --hover-bg: rgba(45, 45, 60, 0.8);
+    --error-bg: rgba(139, 0, 0, 0.8);
+    --th-color: #FF69B4;
+    --table-header-bg: linear-gradient(90deg, #1A1A2E, #252536);
+    --btn-edit: linear-gradient(135deg, #4B6CB7, #182848);
+    --btn-delete: linear-gradient(135deg, #CB356B, #BD3F32);
+    --header-bg: rgba(20, 20, 25, 0.8);
+    --shadow-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Cyber Dark Theme */
+.cyber-dark {
+    --bg-color: #0C0C14;
+    --bg-gradient: linear-gradient(to bottom right, #0C0C14 0%, #1C1C2C 100%);
+    --card-bg: rgba(28, 28, 42, 0.8);
+    --text-color: #00FF41;
+    --muted-text: #00AA41;
+    --accent1: #00FFFF;
+    --accent2: #FF00FF;
+    --border-color: #1E3A3A;
+    --input-bg: rgba(20, 35, 35, 0.6);
+    --btn-gradient: linear-gradient(135deg, #00FFFF, #007A7A);
+    --hover-bg: rgba(0, 55, 55, 0.6);
+    --error-bg: rgba(255, 0, 80, 0.7);
+    --th-color: #00FFFF;
+    --table-header-bg: linear-gradient(90deg, #0A1A1A, #0A2A2A);
+    --btn-edit: linear-gradient(135deg, #00AAFF, #007ACC);
+    --btn-delete: linear-gradient(135deg, #FF0066, #CC0055);
+    --header-bg: rgba(10, 25, 25, 0.9);
+    --shadow-color: rgba(0, 200, 200, 0.2);
+}
+
+/* Mystic Dark Theme */
+.mystic-dark {
+    --bg-color: #191428;
+    --bg-gradient: linear-gradient(to bottom right, #191428 0%, #2D1B42 100%);
+    --card-bg: rgba(45, 35, 65, 0.8);
+    --text-color: #E6D9F2;
+    --muted-text: #BDA8D9;
+    --accent1: #9D65D0;
+    --accent2: #F0A1E2;
+    --border-color: #4A3B6D;
+    --input-bg: rgba(55, 40, 80, 0.5);
+    --btn-gradient: linear-gradient(135deg, #9D65D0, #7A4BAD);
+    --hover-bg: rgba(65, 50, 95, 0.8);
+    --error-bg: rgba(135, 40, 80, 0.8);
+    --th-color: #F0A1E2;
+    --table-header-bg: linear-gradient(90deg, #2D1B42, #3D2B52);
+    --btn-edit: linear-gradient(135deg, #7A55C5, #5D3D96);
+    --btn-delete: linear-gradient(135deg, #D04D9D, #A23B78);
+    --header-bg: rgba(35, 25, 50, 0.9);
+    --shadow-color: rgba(100, 50, 150, 0.3);
+}
+
+/* Neon Dark Theme */
+.neon-dark {
+    --bg-color: #080010;
+    --bg-gradient: linear-gradient(to bottom right, #080010 0%, #160030 100%);
+    --card-bg: rgba(25, 10, 40, 0.8);
+    --text-color: #F2F2FF;
+    --muted-text: #C5C5FF;
+    --accent1: #FF00FF;
+    --accent2: #00FFFF;
+    --border-color: #4D0080;
+    --input-bg: rgba(40, 0, 80, 0.5);
+    --btn-gradient: linear-gradient(135deg, #FF00FF, #CC00CC);
+    --hover-bg: rgba(80, 20, 120, 0.8);
+    --error-bg: rgba(255, 0, 80, 0.8);
+    --th-color: #00FFFF;
+    --table-header-bg: linear-gradient(90deg, #200040, #300060);
+    --btn-edit: linear-gradient(135deg, #00CCFF, #0099CC);
+    --btn-delete: linear-gradient(135deg, #FF3399, #CC2266);
+    --header-bg: rgba(30, 0, 60, 0.9);
+    --shadow-color: rgba(255, 0, 255, 0.2);
+}
+
+/* Shadow Light Theme */
+.shadow-light {
+    --bg-color: #F0F0F7;
+    --bg-gradient: linear-gradient(to bottom right, #F0F0F7 0%, #E0E0ED 100%);
+    --card-bg: rgba(250, 250, 255, 0.9);
+    --text-color: #333344;
+    --muted-text: #666677;
+    --accent1: #7A2CD0;
+    --accent2: #E91E63;
+    --border-color: #CCCCDD;
+    --input-bg: rgba(240, 240, 250, 0.8);
+    --btn-gradient: linear-gradient(135deg, #9D3BE0, #7A2CD0);
+    --hover-bg: rgba(230, 230, 245, 0.9);
+    --error-bg: rgba(255, 235, 238, 0.9);
+    --th-color: #E91E63;
+    --table-header-bg: linear-gradient(90deg, #F0F0F7, #E0E0ED);
+    --btn-edit: linear-gradient(135deg, #3F51B5, #303F9F);
+    --btn-delete: linear-gradient(135deg, #F44336, #D32F2F);
+    --header-bg: rgba(255, 255, 255, 0.95);
+    --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Clean Light Theme */
+.clean-light {
+    --bg-color: #FFFFFF;
+    --bg-gradient: linear-gradient(to bottom right, #FFFFFF 0%, #F5F5F5 100%);
+    --card-bg: rgba(255, 255, 255, 0.9);
+    --text-color: #333333;
+    --muted-text: #777777;
+    --accent1: #2196F3;
+    --accent2: #4CAF50;
+    --border-color: #E0E0E0;
+    --input-bg: rgba(248, 248, 248, 0.9);
+    --btn-gradient: linear-gradient(135deg, #2196F3, #1976D2);
+    --hover-bg: rgba(240, 240, 240, 0.9);
+    --error-bg: rgba(255, 235, 238, 0.9);
+    --th-color: #2196F3;
+    --table-header-bg: linear-gradient(90deg, #F8F8F8, #F0F0F0);
+    --btn-edit: linear-gradient(135deg, #00BCD4, #0097A7);
+    --btn-delete: linear-gradient(135deg, #F44336, #D32F2F);
+    --header-bg: rgba(255, 255, 255, 0.95);
+    --shadow-color: rgba(0, 0, 0, 0.08);
+}
+
+/* Pastel Light Theme */
+.pastel-light {
+    --bg-color: #FFF6F6;
+    --bg-gradient: linear-gradient(to bottom right, #FFF6F6 0%, #F8E1EA 100%);
+    --card-bg: rgba(255, 250, 250, 0.9);
+    --text-color: #5D4037;
+    --muted-text: #8D6E63;
+    --accent1: #F06292;
+    --accent2: #9575CD;
+    --border-color: #F8BBD0;
+    --input-bg: rgba(253, 235, 235, 0.9);
+    --btn-gradient: linear-gradient(135deg, #F06292, #EC407A);
+    --hover-bg: rgba(255, 240, 245, 0.9);
+    --error-bg: rgba(255, 220, 230, 0.9);
+    --th-color: #F06292;
+    --table-header-bg: linear-gradient(90deg, #FFF0F6, #FFEAF0);
+    --btn-edit: linear-gradient(135deg, #9575CD, #7E57C2);
+    --btn-delete: linear-gradient(135deg, #EF5350, #E53935);
+    --header-bg: rgba(255, 245, 250, 0.95);
+    --shadow-color: rgba(244, 143, 177, 0.2);
+}
+
+/* Royal Light Theme */
+.royal-light {
+    --bg-color: #F5F5F8;
+    --bg-gradient: linear-gradient(to bottom right, #F5F5F8 0%, #E8EAF6 100%);
+    --card-bg: rgba(250, 250, 255, 0.9);
+    --text-color: #1A237E;
+    --muted-text: #3949AB;
+    --accent1: #5C6BC0;
+    --accent2: #FFC107;
+    --border-color: #C5CAE9;
+    --input-bg: rgba(240, 242, 255, 0.9);
+    --btn-gradient: linear-gradient(135deg, #5C6BC0, #3F51B5);
+    --hover-bg: rgba(235, 238, 252, 0.9);
+    --error-bg: rgba(255, 235, 238, 0.9);
+    --th-color: #5C6BC0;
+    --table-header-bg: linear-gradient(90deg, #E8EAF6, #C5CAE9);
+    --btn-edit: linear-gradient(135deg, #7986CB, #5C6BC0);
+    --btn-delete: linear-gradient(135deg, #E57373, #EF5350);
+    --header-bg: rgba(245, 246, 255, 0.95);
+    --shadow-color: rgba(63, 81, 181, 0.15);
+}
+
+/* Apply theme variables to elements */
+.shadow-dark .theme-btn[data-theme="shadow-dark"],
+.cyber-dark .theme-btn[data-theme="cyber-dark"],
+.mystic-dark .theme-btn[data-theme="mystic-dark"],
+.neon-dark .theme-btn[data-theme="neon-dark"],
+.shadow-light .theme-btn[data-theme="shadow-light"],
+.clean-light .theme-btn[data-theme="clean-light"],
+.pastel-light .theme-btn[data-theme="pastel-light"],
+.royal-light .theme-btn[data-theme="royal-light"] {
+    border: 2px solid #FFFFFF;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
